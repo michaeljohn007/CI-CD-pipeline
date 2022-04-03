@@ -19,17 +19,17 @@ jobs:
       - name: Compile
         run: echo Imagine we are compiling our code here!
 
-DeployDev:
-  name: Deploy to development
-  if: gitgub.event_name == 'pull_request'
-  needs: [Build]
-  runs-on: ubuntu_latest
-  environment:
-    name: Development
-    url: 'http://dev.myapp.com'
-  steps:
-    -name: Deploy
-    runs: echo Your code is being deployed to http://dev.myapp.com!
+  DeployDev:
+    name: Deploy to development
+    if: github.event_name == 'pull_request'
+    needs: [Build]
+    runs-on: ubuntu_latest
+    environment:
+      name: Development
+      url: 'http://dev.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo Your code is being deployed to http://dev.myapp.com!
 
 # Our deployment to staging environment job
   DeployStaging:
@@ -48,7 +48,8 @@ DeployDev:
     name: Deploy to production
     needs: [DeployStaging]
     runs-on: ubuntu_latest
-      name: Prod
+    environment:
+      name: Production
       url: 'http://www.myapp.com'
     steps:
       - name: Deploy
