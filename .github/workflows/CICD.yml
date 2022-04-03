@@ -48,7 +48,8 @@ DeployDev:
     name: Deploy to production
     needs: [DeployStaging]
     runs-on: ubuntu_latest
-      name: Prod
+    environment:
+      name: Production
       url: 'http://www.myapp.com'
     steps:
       - name: Deploy
